@@ -4,8 +4,7 @@
   "features": [
     "reefredux:small_reef_rock",
     "reefredux:medium_reef_rock",
-    "reefredux:large_reef_rock",
-    "reefredux:coral_patch"
+    "reefredux:large_reef_rock"
   ],
-  "step": "vegetal_decoration"
+  "step": "underground_decoration"
 }

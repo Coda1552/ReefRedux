@@ -85,7 +85,7 @@ public abstract class AbstractReefRockFeature extends Feature<NoneFeatureConfigu
                     float f = noise.GetNoise(x, (float) y, z);
 
                     if (distance < 1) {
-                        if (finalSection && f < -0.15 && f > -0.165) {
+                        if (finalSection && f < -0.15 && f > -0.17) {
                             worldgenlevel.setBlock(pos, coral.map(Block::defaultBlockState).orElseGet(Blocks.STONE::defaultBlockState), 3);
                             createPlates(worldgenlevel, pos, worldgenlevel.getBlockState(pos));
                         }
@@ -114,29 +114,43 @@ public abstract class AbstractReefRockFeature extends Feature<NoneFeatureConfigu
             return p_224980_.getRandomElement(worldgenlevel.getRandom());
         }).map(Holder::value);
 
-        for (int i = -2; i <= 2; i++) {
-            for (int j = -2; j <= 2; j++) {
-                BlockPos pos = coralPos.offset(i, 0, j);
-                double distance = distance(i, 1, j, 3, 1, 3);
-                if (distance < 1.8) {
-                    worldgenlevel.setBlock(pos, coralType, 3);
+        if (worldgenlevel.getRandom().nextFloat() > 0.6F) {
 
-                    for (Direction dir : Direction.Plane.HORIZONTAL) {
-                        BlockState block = coral.map(Block::defaultBlockState).orElseGet(Blocks.HORN_CORAL_WALL_FAN::defaultBlockState).setValue(CoralWallFanBlock.WATERLOGGED, true).setValue(CoralWallFanBlock.FACING, dir);
+            for (int i = -2; i <= 2; i++) {
+                for (int j = -2; j <= 2; j++) {
+                    BlockPos pos = coralPos.offset(i, 0, j);
+                    double distance = distance(i, 1, j, 3, 1, 3);
+                    if (distance < 1.8) {
+                        worldgenlevel.setBlock(pos, coralType, 3);
 
-                        // is there a worse way to do this?
-                        BlockPos fanPos0 = coralPos.relative(dir, 3);
-                        BlockPos fanPos1 = coralPos.relative(dir, 3).relative(dir.getClockWise());
-                        BlockPos fanPos2 = coralPos.relative(dir, 3).relative(dir.getCounterClockWise());
-                        if (worldgenlevel.getBlockState(fanPos0).is(Blocks.WATER)) {
-                            worldgenlevel.setBlock(fanPos0, block, 3);
+                        for (Direction dir : Direction.Plane.HORIZONTAL) {
+                            BlockState block = coral.map(Block::defaultBlockState).orElseGet(Blocks.HORN_CORAL_WALL_FAN::defaultBlockState).setValue(CoralWallFanBlock.WATERLOGGED, true).setValue(CoralWallFanBlock.FACING, dir);
+
+                            // is there a worse way to do this?
+                            BlockPos fanPos0 = coralPos.relative(dir, 3);
+                            BlockPos fanPos1 = coralPos.relative(dir, 3).relative(dir.getClockWise());
+                            BlockPos fanPos2 = coralPos.relative(dir, 3).relative(dir.getCounterClockWise());
+                            if (worldgenlevel.getBlockState(fanPos0).is(Blocks.WATER)) {
+                                worldgenlevel.setBlock(fanPos0, block, 3);
+                            }
+                            if (worldgenlevel.getBlockState(fanPos1).is(Blocks.WATER)) {
+                                worldgenlevel.setBlock(fanPos1, block, 3);
+                            }
+                            if (worldgenlevel.getBlockState(fanPos2).is(Blocks.WATER)) {
+                                worldgenlevel.setBlock(fanPos2, block, 3);
+                            }
                         }
-                        if (worldgenlevel.getBlockState(fanPos1).is(Blocks.WATER)) {
-                            worldgenlevel.setBlock(fanPos1, block, 3);
-                        }
-                        if (worldgenlevel.getBlockState(fanPos2).is(Blocks.WATER)) {
-                            worldgenlevel.setBlock(fanPos2, block, 3);
-                        }
+                    }
+                }
+            }
+        }
+        else {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    BlockPos pos = coralPos.offset(i, 0, j);
+                    double distance = distance(i, 1, j, 2, 1, 2);
+                    if (distance < 1.8) {
+                        worldgenlevel.setBlock(pos, coralType, 3);
                     }
                 }
             }

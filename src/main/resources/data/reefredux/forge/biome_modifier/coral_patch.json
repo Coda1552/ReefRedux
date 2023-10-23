@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:warm_ocean",
+  "features": [
+    "reefredux:coral_patch",
+    "reefredux:sea_pickle_patch"
+  ],
+  "step": "vegetal_decoration"
+}
