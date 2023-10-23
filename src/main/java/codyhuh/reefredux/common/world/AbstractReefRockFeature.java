@@ -5,7 +5,6 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Optional;
 
@@ -68,9 +68,7 @@ public abstract class AbstractReefRockFeature extends Feature<NoneFeatureConfigu
     private static void createRockSection(WorldGenLevel worldgenlevel, BlockPos origin, int radius, int height, BlockState block, FastNoiseLite noise, boolean finalSection) {
         int heightLower = 0;
 
-        Optional<Block> coral = BuiltInRegistries.BLOCK.getTag(BlockTags.CORAL_BLOCKS).flatMap((p_224980_) -> {
-            return p_224980_.getRandomElement(worldgenlevel.getRandom());
-        }).map(Holder::value);
+        Optional<Block> coral = ForgeRegistries.BLOCKS.tags().getTag(BlockTags.CORAL_BLOCKS).getRandomElement(worldgenlevel.getRandom());
 
         if (finalSection) {
             heightLower = -height;
@@ -110,9 +108,8 @@ public abstract class AbstractReefRockFeature extends Feature<NoneFeatureConfigu
     }
 
     public static void createPlates(WorldGenLevel worldgenlevel, BlockPos coralPos, BlockState coralType) {
-        Optional<Block> coral = BuiltInRegistries.BLOCK.getTag(BlockTags.WALL_CORALS).flatMap((p_224980_) -> {
-            return p_224980_.getRandomElement(worldgenlevel.getRandom());
-        }).map(Holder::value);
+        Optional<Block> coral = ForgeRegistries.BLOCKS.tags().getTag(BlockTags.WALL_CORALS).getRandomElement(worldgenlevel.getRandom());
+
 
         for (int i = -2; i <= 2; i++) {
             for (int j = -2; j <= 2; j++) {
