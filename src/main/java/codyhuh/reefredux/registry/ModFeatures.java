@@ -1,6 +1,7 @@
 package codyhuh.reefredux.registry;
 
 import codyhuh.reefredux.ReefRedux;
+import codyhuh.reefredux.common.world.CoralPatchFeature;
 import codyhuh.reefredux.common.world.LargeReefRockFeature;
 import codyhuh.reefredux.common.world.MediumReefRockFeature;
 import codyhuh.reefredux.common.world.SmallReefRockFeature;
@@ -16,4 +17,5 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> SMALL_REEF_ROCK = FEATURES.register("small_reef_rock", () -> new SmallReefRockFeature(NoneFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> MEDIUM_REEF_ROCK = FEATURES.register("medium_reef_rock", () -> new MediumReefRockFeature(NoneFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> LARGE_REEF_ROCK = FEATURES.register("large_reef_rock", () -> new LargeReefRockFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> CORAL_PATCH = FEATURES.register("coral_patch", () -> new CoralPatchFeature(NoneFeatureConfiguration.CODEC));
 }
